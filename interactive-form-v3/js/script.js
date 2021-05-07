@@ -34,34 +34,25 @@ color.disabled = true;
 
 design.addEventListener('change', (e) => {
     color.disabled = false;
- for(let i=0; i<=colorOptions.length; i++) {
+ for(let i=1; i<colorOptions.length; i++) {
 const eventT = e.target.value;
 console.log(eventT);
 
-const attribute = color.getAttribute('data-theme');
+const attribute = colorOptions[i].getAttribute('data-theme');
 console.log(attribute);
 
 if (attribute === eventT) {
-    colorOptions.hidden = false;
-    colorOptions.setAttribute = true;
+    colorOptions[i].hidden = false;
+    colorOptions[i].setAttribute = true;
 } else {
-    colorOptions.hidden = true;
-    colorOptions.setAttribute = false;
+    colorOptions[i].hidden = true;
+    colorOptions[i].setAttribute = false;
 }
 
  }
 
 })
 
-
-// Still in the loop, create a conditional that checks if the two variables that were just created are equal to one another. 
-// If they are, set the hidden property of the loop’s current option element to false,
-//  and set the selected attribute of the loop’s current option element to true. 
-//  And if the two variables are not equal to one another, set the hidden property of the loop’s current option element to true,
-//   and set the selected attribute of the loop’s current option element to false.
-// You can use dot notation to update the hidden property. But you’ll need to use the setAttribute or removeAttribute methods to update the selected attribute.
-// Using dot notation or the getAttribute method, the hidden property and the selected attribute of an element can be logged out to the console for inspection.
-// Now save and refresh the page, and when a theme is selected, the "Color" field should be enabled and it’s value should update along with the options in the "Color" drop-down menu.
 
 
 
@@ -81,3 +72,34 @@ if (attribute === eventT) {
 // Pro Tip:
 // The selected attribute can determine which option element is displayed in the select field.
 // The hidden attribute can prevent option elements from being displayed in the drop down menu.
+
+
+
+
+// activities section
+
+// const activities = document.getElementById('activities');
+// const activitiesCost = document.getElementById('activities-cost');
+// const totalCost = 0;
+// console.log(activities, activitiesCost, totalCost);
+
+// activities.addEventListener('change', (e) => {
+//     const dataCost = e.target.getAttribute('data-cost');
+//     parseInt(dataCost);
+//     console.log(dataCost);
+//     if (e.target === 'checked') {
+//         totalCost = totalCost + dataCost;
+//     }
+// }) 
+
+
+
+// Still inside the event listener, create a conditional to determine if the event.target was just checked or unchecked. 
+// The checked property will be helpful here.
+//  If the event.target was checked, then add the "data-cost" of the event.target to the total variable that was created earlier. 
+//  If the event.target was unchecked, then subtract the “data-cost”.
+// To test this, you can log out the total cost variable as well as the checked property of the event.target. 
+//You’ll have to select activities to see this log statement as well.
+
+// Lastly, update the innerHTML of the “Total:” <p> element with the new total cost, 
+//but mind the formatting so that the end result still resembles the initial text: "Total: $0".
