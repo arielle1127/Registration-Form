@@ -34,44 +34,21 @@ color.disabled = true;
 
 design.addEventListener('change', (e) => {
     color.disabled = false;
- for(let i=1; i<colorOptions.length; i++) {
-const eventT = e.target.value;
-console.log(eventT);
+    for(let i=1; i<colorOptions.length; i++) {
+    const eventT = e.target.value;
+    const attribute = colorOptions[i].getAttribute('data-theme');
+        console.log(eventT);
+        console.log(attribute);
 
-const attribute = colorOptions[i].getAttribute('data-theme');
-console.log(attribute);
-
-if (attribute === eventT) {
-    colorOptions[i].hidden = false;
-    colorOptions[i].setAttribute = true;
-} else {
-    colorOptions[i].hidden = true;
-    colorOptions[i].setAttribute = false;
-}
-
- }
-
+    if (attribute === eventT) {
+        colorOptions[i].hidden = false;
+        colorOptions[i].setAttribute = true;
+    } else {
+        colorOptions[i].hidden = true;
+        colorOptions[i].setAttribute = false;
+    }
+  }
 })
-
-
-
-
-
-// If the user selects "Theme - JS Puns" then the "Color"
-//      menu should only display "Cornflower Blue," "Dark Slate Grey," and "Gold."
-// If the user selects "Theme - I ♥ JS" then the "Color" 
-//     menu should only display "Tomato," "Steel Blue," and "Dim Grey."
-
-// A select element is used for the color selection. 
-// There are two parts to a select element display: 
-//     the element field
-//      and the drop down menu which opens after clicking on the field. 
-// Both the "Color" field and drop down menu must correctly update when the user selects a new theme. 
-// Neither should be empty or display unavailable colors.
-
-// Pro Tip:
-// The selected attribute can determine which option element is displayed in the select field.
-// The hidden attribute can prevent option elements from being displayed in the drop down menu.
 
 
 
