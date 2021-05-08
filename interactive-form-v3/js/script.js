@@ -27,7 +27,6 @@ jobRole.addEventListener('change', () => {
 const color = document.getElementById('color');
 const design = document.getElementById('design');
 const colorOptions = document.getElementById('color').children;
-console.log(color, design, colorOptions);
 color.disabled = true;
 
 //when they pick a design, then they get color choices
@@ -37,8 +36,6 @@ design.addEventListener('change', (e) => {
     for(let i=1; i<colorOptions.length; i++) {
     const eventT = e.target.value;
     const attribute = colorOptions[i].getAttribute('data-theme');
-        console.log(eventT);
-        console.log(attribute);
 
     if (attribute === eventT) {
         colorOptions[i].hidden = false;
@@ -50,33 +47,21 @@ design.addEventListener('change', (e) => {
   }
 })
 
-
-
-
 // activities section
+//The total cost of the selected activities in the "Register for Activities" section should be totaled and displayed
 
-// const activities = document.getElementById('activities');
-// const activitiesCost = document.getElementById('activities-cost');
-// const totalCost = 0;
-// console.log(activities, activitiesCost, totalCost);
+const activities = document.getElementById('activities');
+const activitiesCost = document.getElementById('activities-cost');
+let totalCost = 0;
 
-// activities.addEventListener('change', (e) => {
-//     const dataCost = e.target.getAttribute('data-cost');
-//     parseInt(dataCost);
-//     console.log(dataCost);
-//     if (e.target === 'checked') {
-//         totalCost = totalCost + dataCost;
-//     }
-// }) 
+activities.addEventListener('change', (e) => {
+    const dataCost = e.target.getAttribute('data-cost');
+    if (e.target.checked === true) {
+        activitiesCost.innerHTML = `Total: $${totalCost += +dataCost}`;
+    } 
+    if (e.target.checked === false) {
+        activitiesCost.innerHTML = `Total: $${totalCost -= +dataCost}`;
+    }
+}) 
 
 
-
-// Still inside the event listener, create a conditional to determine if the event.target was just checked or unchecked. 
-// The checked property will be helpful here.
-//  If the event.target was checked, then add the "data-cost" of the event.target to the total variable that was created earlier. 
-//  If the event.target was unchecked, then subtract the “data-cost”.
-// To test this, you can log out the total cost variable as well as the checked property of the event.target. 
-//You’ll have to select activities to see this log statement as well.
-
-// Lastly, update the innerHTML of the “Total:” <p> element with the new total cost, 
-//but mind the formatting so that the end result still resembles the initial text: "Total: $0".
