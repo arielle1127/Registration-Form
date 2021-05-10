@@ -64,4 +64,69 @@ activities.addEventListener('change', (e) => {
     }
 }) 
 
+//Payment Section
 
+
+//  The preferred or most common payment method option should be selected
+//  and the corresponding payment form sections should be displayed by default,
+//   while the other payment form sections should be hidden.
+
+const paymentMethod = document.getElementById('payment');
+const creditCard = document.getElementById('credit-card');
+const paypal = document.getElementById('paypal');
+const bitcoin = document.getElementById('bitcoin');
+console.log(paymentMethod, creditCard, paypal, bitcoin);
+
+paypal.style.display = 'none';
+bitcoin.style.display = 'none';
+
+paymentMethod.children[1].setAttribute.selected = true;
+
+paymentMethod.addEventListener('change', (e) => {
+    if (e.target.value === 'bitcoin') {
+        bitcoin.style.display = 'block';
+        creditCard.style.display = 'none';
+        paypal.style.display = 'none';
+
+        
+    } else if (e.target.value === 'paypal'){
+        paypal.style.display = 'block';
+        bitcoin.style.display = 'none';
+        creditCard.style.display = 'none';
+
+        
+    } else {
+    creditCard.style.display = 'block';
+    paypal.style.display = 'none';
+    bitcoin.style.display = 'none';
+    }
+})
+
+
+//QUESTION ==== there must be a better more concise way to do this besides listing all options if else if else if else
+//QUESTION ==== What does this do? makes the attribute of 'credit card' = selected? paymentMethod.children[1].setAttribute.selected = true;
+
+
+//FORM VALIDATION
+
+
+const email =  document.getElementById('email');
+const cardNumber =  document.getElementById('cc-num');
+const zipCode =  document.getElementById('zip');
+const cvv = document.getElementById('cvv');
+const form = document.querySelector('form');
+
+
+
+form.addEventListener('submit', () => {
+const nameValue = nameField.value
+
+})
+
+
+//Inside the event listener, use the name variable, dot notation and the value property to create a new variable 
+//that references the value of the “Name” field.
+
+//Create another variable to store the results of testing the name value variable that was just created. 
+//Regex will be helpful, and the regex course from this unit will demonstrate how to do this. 
+//This variable will equal true if the test passes, and false otherwise.
