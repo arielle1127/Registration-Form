@@ -6,8 +6,8 @@ Interactive Form
 //name field highlight
 //job role, make "other" appear when selected in menu
 
-const nameField = document.querySelector('input');
-nameField.focus();
+const name = document.querySelector('input');
+name.focus();
 const jobRole = document.querySelector('select');
 const otherRole  =  document.getElementById('other-job-role');
 otherRole.style.display =  'none';
@@ -47,7 +47,7 @@ design.addEventListener('change', (e) => {
   }
 })
 
-// activities section
+
 //The total cost of the selected activities in the "Register for Activities" section should be totaled and displayed
 
 const activities = document.getElementById('activities');
@@ -75,7 +75,6 @@ const paymentMethod = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
 const paypal = document.getElementById('paypal');
 const bitcoin = document.getElementById('bitcoin');
-console.log(paymentMethod, creditCard, paypal, bitcoin);
 
 paypal.style.display = 'none';
 bitcoin.style.display = 'none';
@@ -104,7 +103,9 @@ paymentMethod.addEventListener('change', (e) => {
 
 
 //QUESTION ==== there must be a better more concise way to do this besides listing all options if else if else if else
-//QUESTION ==== What does this do? makes the attribute of 'credit card' = selected? paymentMethod.children[1].setAttribute.selected = true;
+//QUESTION ==== What does this do? -----> paymentMethod.children[1].setAttribute.selected = true;
+//Question === How do I check the activitiesValidator to see if a box was checked?
+//Question === Why do the number requirements for my regex not work? It takes the lower limit, but doens't work for the upper limit
 
 
 //FORM VALIDATION
@@ -112,21 +113,107 @@ paymentMethod.addEventListener('change', (e) => {
 
 const email =  document.getElementById('email');
 const cardNumber =  document.getElementById('cc-num');
-const zipCode =  document.getElementById('zip');
+const zipcode =  document.getElementById('zip');
 const cvv = document.getElementById('cvv');
 const form = document.querySelector('form');
 
 
+const nameValidator = () => {
+    const nameValue = name.value;
+    const nameIsValid = /[a-zA-Z]{1,}/.test(nameValue);
+    return nameIsValid;
+}
 
-form.addEventListener('submit', () => {
-const nameValue = nameField.value
+const emailValidator = () => {
+    const emailValue = email.value;
+    const emailIsValid = /\w{3,}@\w{3,}(.com)/.test(emailValue);
+    return emailIsValid;
+}
 
+const activitiesValidator = () => {                     //I don't know how to check this?
+
+    const activitiesValue = activities.value;
+    const activitiesIsValid = activitiesValue.checked;
+    return activitiesIsValid;
+}
+
+const cardNumberValidator = () => {
+    const cardNumberValue = cardNumber.value;
+    const cardNumberIsValid = /\d{13,16}/.test(cardNumberValue);   //this is also not working for 16 limit?
+    return cardNumberIsValid;
+}
+
+const zipcodeValidator = () => {
+    const zipcodeValue = zipcode.value;
+    const zipcodeIsValid = /\d{5}/.test(zipcodeValue);  //Why is my reg ex not working???
+    return zipcodeIsValid;
+}
+
+const cvvValidator = () => {
+    const cvvValue = cvv.value;
+    const cvvIsValid = /\d{3}/.test(cvvValue);   //upper limit  also not working??
+    return cvvIsValid;
+}
+
+form.addEventListener('submit', (e) => {
+     //e.preventDefault();
+     nameValidator();
+     emailValidator();
+    activitiesValidator();
+    cardNumberValidator();
+     zipcodeValidator();
+     cvvValidator();
+
+    if (!nameValidator()) {
+        e.preventDefault();
+        alert('Invalid name');
+        // parent.classList.add('not-valid');
+        // parent.classList.remove('valid');
+        // parent.lastElementChild.style.display = 'block';
+     } 
+    if (!emailValidator()) {
+        e.preventDefault();
+        alert('Invalid email');
+     } 
+    if (!activitiesValidator()) {
+        e.preventDefault();
+        alert('Choose at least one');
+    } 
+    if (!cardNumberValidator()) {   // if CARD PAYMENT IS SELECTED  && 
+        e.preventDefault();
+        alert('Invalid card number');
+    } 
+    if (!zipcodeValidator()) {
+        e.preventDefault();
+        alert('Invalid zipcode');
+    } 
+    if (!cvvValidator()) {
+        e.preventDefault();
+        alert('Invalid cvv');
+    } 
+   
 })
 
 
-//Inside the event listener, use the name variable, dot notation and the value property to create a new variable 
-//that references the value of the “Name” field.
 
-//Create another variable to store the results of testing the name value variable that was just created. 
-//Regex will be helpful, and the regex course from this unit will demonstrate how to do this. 
-//This variable will equal true if the test passes, and false otherwise.
+// const isChecked = e.target.checked;
+// Accessibility
+
+
+//QUESTION: WHy is the i undefined in this addEventListener?
+
+// const checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+// for(let i = 0; i < checkboxes.length; i++); {
+// console.log(checkboxes[1]);
+  
+// checkboxes[i].addEventListener('focus', () => {    //why is i undefined?
+//     parentElement.classList.add('focus');
+    
+//     })
+
+// checkboxes[i].addEventListener('blur', () => {    //why is i undefined?
+//     parentElement.classList.add('blur');
+        
+//     })
+// }
