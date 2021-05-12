@@ -100,11 +100,15 @@ paymentMethod.addEventListener('change', (e) => {
     bitcoin.style.display = 'none';
     }
 })
+///////////////////////////////  EVERYTHING ABOVE WORKS FINE    //////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 //QUESTION ==== there must be a better more concise way to do this besides listing all options if else if else if else
-//QUESTION ==== What does this do? -----> paymentMethod.children[1].setAttribute.selected = true;
-//Question === How do I check the activitiesValidator to see if a box was checked?
+//QUESTION ==== What does this do? -----> paymentMethod.children[1].setAttribute.selected = true;  does it mean that credit card is default selected?
+//Question === How do I write the activitiesValidator to see if a box was checked?
 //Question === Why do the number requirements for my regex not work? It takes the lower limit, but doens't work for the upper limit
 
 
@@ -196,7 +200,7 @@ form.addEventListener('submit', (e) => {
 
 
 
-// const isChecked = e.target.checked;
+
 // Accessibility
 
 
