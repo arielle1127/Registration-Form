@@ -159,9 +159,9 @@ form.addEventListener('submit', (e) => {
      emailValidator();
      activitiesValidator();
 
-    //  cardNumberValidator();
-    //  zipcodeValidator();
-    //  cvvValidator();
+     cardNumberValidator();
+     zipcodeValidator();
+     cvvValidator();
 
 
     if (!nameValidator()) {
@@ -202,20 +202,20 @@ form.addEventListener('submit', (e) => {
 
 
 
-    // if (!cardNumberValidator()) {   // if creditCard.selected = true  &&  ??????
-    //     e.preventDefault();
-    //     alert('Invalid card number');
-    // } 
-    // if (!zipcodeValidator()) {
-    //     e.preventDefault();
-    //     alert('Invalid zipcode');
-    // } 
-    // if (!cvvValidator()) {
-    //     e.preventDefault();
-    //     alert('Invalid cvv');
-    // } 
+    if (creditCard.selected === true  && !cardNumberValidator()) {  
+        e.preventDefault();
+        alert('Invalid card number');
+    } 
+    if (creditCard.selected === true  && !zipcodeValidator()) {
+        e.preventDefault();
+        alert('Invalid zipcode');
+    } 
+    if (creditCard.selected === true  && !cvvValidator()) {
+        e.preventDefault();
+        alert('Invalid cvv');
+    } 
    
-//})
+})
 
     
 
