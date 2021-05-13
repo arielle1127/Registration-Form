@@ -3,7 +3,7 @@ Interactive Form
 */
 
 
-//name field highlight
+//NAME FIELD HIGHLIGHT
 //job role, make "other" appear when selected in menu
 
 const name = document.querySelector('input');
@@ -11,6 +11,8 @@ name.focus();
 const jobRole = document.querySelector('select');
 const otherRole  =  document.getElementById('other-job-role');
 otherRole.style.display =  'none';
+
+//JOBROLE + OTHER DISPLAY
 
 jobRole.addEventListener('change', () => {
     if (jobRole.value === 'other'){
@@ -20,7 +22,7 @@ jobRole.addEventListener('change', () => {
     }
 });
 
-//tshirt info section
+//TSHIRT DESIGN SELECTION
 //after they choose design, then they choose available colors
 //color options are default disabled until they choose design
 
@@ -47,7 +49,7 @@ design.addEventListener('change', (e) => {
   }
 })
 
-
+//ACTIVITIES COST SECTION
 //The total cost of the selected activities in the "Register for Activities" section should be totaled and displayed
 
 const activities = document.getElementById('activities');
@@ -64,7 +66,8 @@ activities.addEventListener('change', (e) => {
     }
 }) 
 
-//Payment Section
+
+//PAYMENT SELECTION
 
 
 //  The preferred or most common payment method option should be selected
@@ -100,19 +103,9 @@ paymentMethod.addEventListener('change', (e) => {
     bitcoin.style.display = 'none';
     }
 })
-///////////////////////////////  EVERYTHING ABOVE WORKS FINE    //////////////////////////////////////////////////////////////////////////
 
+//FORM VALIDATION VARIABLES/FUNCTIONS DECLARED
 
-
-
-
-//QUESTION ==== there must be a better more concise way to do this besides listing all options if else if else if else
-//QUESTION ==== What does this do? -----> paymentMethod.children[1].setAttribute.selected = true;  does it mean that credit card is default selected?
-//Question === How do I write the activitiesValidator to see if a box was checked?
-//Question === Why do the number requirements for my regex not work? It takes the lower limit, but doens't work for the upper limit
-
-
-//FORM VALIDATION
 
 
 const email =  document.getElementById('email');
@@ -134,90 +127,117 @@ const emailValidator = () => {
     return emailIsValid;
 }
 
-const activitiesValidator = () => {                     //I don't know how to check this?
-
-    const activitiesValue = activities.value;
-    const activitiesIsValid = activitiesValue.checked;
+const activitiesValidator = () => {                    
+    const activitiesIsValid = totalCost > 0;
     return activitiesIsValid;
 }
 
 const cardNumberValidator = () => {
     const cardNumberValue = cardNumber.value;
-    const cardNumberIsValid = /\d{13,16}/.test(cardNumberValue);   //this is also not working for 16 limit?
+    const cardNumberIsValid = /^\d{13,16}$/.test(cardNumberValue);   
     return cardNumberIsValid;
 }
 
 const zipcodeValidator = () => {
     const zipcodeValue = zipcode.value;
-    const zipcodeIsValid = /\d{5}/.test(zipcodeValue);  //Why is my reg ex not working???
+    const zipcodeIsValid = /^\d{5}$/.test(zipcodeValue);  
     return zipcodeIsValid;
 }
 
 const cvvValidator = () => {
     const cvvValue = cvv.value;
-    const cvvIsValid = /\d{3}/.test(cvvValue);   //upper limit  also not working??
+    const cvvIsValid = /^\d{3}$/.test(cvvValue);   
     return cvvIsValid;
 }
 
+//FORM VALIDATION FUNCTIONS CALLED 
+//HINTS DISPLAYED/HIDDEN UPON INVALID/VALID 
+
 form.addEventListener('submit', (e) => {
-     //e.preventDefault();
+     e.preventDefault();
      nameValidator();
      emailValidator();
-    activitiesValidator();
-    cardNumberValidator();
-     zipcodeValidator();
-     cvvValidator();
+     activitiesValidator();
+
+    //  cardNumberValidator();
+    //  zipcodeValidator();
+    //  cvvValidator();
+
 
     if (!nameValidator()) {
         e.preventDefault();
-        alert('Invalid name');
-        // parent.classList.add('not-valid');
-        // parent.classList.remove('valid');
-        // parent.lastElementChild.style.display = 'block';
-     } 
+        name.parentElement.className.add = 'not-valid';
+        name.parentElement.className.remove = 'valid';
+        name.parentElement.lastElementChild.style.display = 'block';
+
+     } else {
+        name.parentElement.className.add = 'valid';
+        name.parentElement.className.remove = 'not-valid';
+        name.parentElement.lastElementChild.style.display = 'none';
+
+     }
+     
     if (!emailValidator()) {
         e.preventDefault();
-        alert('Invalid email');
-     } 
+        email.parentElement.className.add = 'not-valid';
+        email.parentElement.className.remove = 'valid';
+        email.parentElement.lastElementChild.style.display = 'block';
+     } else {
+        email.parentElement.className.add = 'valid';
+        email.parentElement.className.remove = 'not-valid';
+        email.parentElement.lastElementChild.style.display = 'none';
+
+     }
+
     if (!activitiesValidator()) {
         e.preventDefault();
-        alert('Choose at least one');
-    } 
-    if (!cardNumberValidator()) {   // if CARD PAYMENT IS SELECTED  && 
-        e.preventDefault();
-        alert('Invalid card number');
-    } 
-    if (!zipcodeValidator()) {
-        e.preventDefault();
-        alert('Invalid zipcode');
-    } 
-    if (!cvvValidator()) {
-        e.preventDefault();
-        alert('Invalid cvv');
-    } 
+       activitiesBox.parentElement.className.add = 'not-valid';
+       activitiesBox.parentElement.className.remove = 'valid';
+       activitiesBox.parentElement.lastElementChild.style.display = 'block';
+    } else {
+        activitiesBox.parentElement.className.add = 'valid';
+        activitiesBox.parentElement.className.remove = 'not-valid';
+        activitiesBox.parentElement.lastElementChild.style.display = 'none';
+     }
+
+
+
+    // if (!cardNumberValidator()) {   // if creditCard.selected = true  &&  ??????
+    //     e.preventDefault();
+    //     alert('Invalid card number');
+    // } 
+    // if (!zipcodeValidator()) {
+    //     e.preventDefault();
+    //     alert('Invalid zipcode');
+    // } 
+    // if (!cvvValidator()) {
+    //     e.preventDefault();
+    //     alert('Invalid cvv');
+    // } 
    
-})
+//})
 
-
-
-
-// Accessibility
-
-
-//QUESTION: WHy is the i undefined in this addEventListener?
-
-// const checkboxes = document.querySelectorAll("input[type='checkbox']");
-
-// for(let i = 0; i < checkboxes.length; i++); {
-// console.log(checkboxes[1]);
-  
-// checkboxes[i].addEventListener('focus', () => {    //why is i undefined?
-//     parentElement.classList.add('focus');
     
-//     })
 
-// checkboxes[i].addEventListener('blur', () => {    //why is i undefined?
-//     parentElement.classList.add('blur');
-        
-//     })
-// }
+
+
+// ACCESSIBILITY USING FOCUS AND BLUR
+
+//puts the focus on each checkbox input element when user clicks tab
+//loop iterates through each checkbox, one at a time
+
+const checkboxes = document.querySelectorAll("input[type='checkbox']");
+const activitiesBox = document.getElementById('activities-box');
+
+for (let i=0; i<checkboxes.length; i++) {
+
+  
+checkboxes[i].addEventListener('focus', () => {   
+     activitiesBox.children[i].classList.add('focus');
+     })
+
+checkboxes[i].addEventListener('blur', () => {    
+    activitiesBox.children[i].classList.add('blur');
+    activitiesBox.children[i].classList.remove('focus');    
+    })
+}
