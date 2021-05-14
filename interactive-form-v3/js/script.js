@@ -4,15 +4,21 @@ Interactive Form
 
 
 //NAME FIELD HIGHLIGHT
-//job role, make "other" appear when selected in menu
+
+    //puts focus on name input field as default
 
 const name = document.querySelector('input');
 name.focus();
+
+//JOBROLE + OTHER DISPLAY
+
+    //input field for "other" job role is hidden by default
+
 const jobRole = document.querySelector('select');
 const otherRole  =  document.getElementById('other-job-role');
 otherRole.style.display =  'none';
 
-//JOBROLE + OTHER DISPLAY
+    //input field for "other" job role appears only when selected in menu, disappears when deselected   
 
 jobRole.addEventListener('change', () => {
     if (jobRole.value === 'other'){
@@ -23,15 +29,14 @@ jobRole.addEventListener('change', () => {
 });
 
 //TSHIRT DESIGN SELECTION
-//after they choose design, then they choose available colors
-//color options are default disabled until they choose design
+    //colors menu is disabled by default 
 
 const color = document.getElementById('color');
 const design = document.getElementById('design');
 const colorOptions = document.getElementById('color').children;
 color.disabled = true;
 
-//when they pick a design, then they get color choices
+    //color field updates with available colors when Tshirt design is selected
 
 design.addEventListener('change', (e) => {
     color.disabled = false;
@@ -50,7 +55,7 @@ design.addEventListener('change', (e) => {
 })
 
 //ACTIVITIES COST SECTION
-//The total cost of the selected activities in the "Register for Activities" section should be totaled and displayed
+    //The total cost of the selected activities in the "Register for Activities" section should be totaled and displayed
 
 const activities = document.getElementById('activities');
 const activitiesCost = document.getElementById('activities-cost');
@@ -68,11 +73,7 @@ activities.addEventListener('change', (e) => {
 
 
 //PAYMENT SELECTION
-
-
-//  The preferred or most common payment method option should be selected
-//  and the corresponding payment form sections should be displayed by default,
-//   while the other payment form sections should be hidden.
+    //credit card displayed as default
 
 const paymentMethod = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
@@ -82,21 +83,22 @@ const bitcoin = document.getElementById('bitcoin');
 paypal.style.display = 'none';
 bitcoin.style.display = 'none';
 
-paymentMethod.children[1].setAttribute.selected = true;
+const creditCardDefault = paymentMethod.children[1]
+creditCardDefault.setAttribute('selected', 'selected');
+
+    //when one payment method is selected, it is displayed and all other payment methods are hidden
 
 paymentMethod.addEventListener('change', (e) => {
     if (e.target.value === 'bitcoin') {
         bitcoin.style.display = 'block';
         creditCard.style.display = 'none';
         paypal.style.display = 'none';
-
         
     } else if (e.target.value === 'paypal'){
         paypal.style.display = 'block';
         bitcoin.style.display = 'none';
         creditCard.style.display = 'none';
-
-        
+ 
     } else {
     creditCard.style.display = 'block';
     paypal.style.display = 'none';
@@ -106,14 +108,13 @@ paymentMethod.addEventListener('change', (e) => {
 
 //FORM VALIDATION VARIABLES/FUNCTIONS DECLARED
 
-
-
 const email =  document.getElementById('email');
 const cardNumber =  document.getElementById('cc-num');
 const zipcode =  document.getElementById('zip');
 const cvv = document.getElementById('cvv');
 const form = document.querySelector('form');
 
+    //functions that check if the value of each field is valid determined by /regex/.test method
 
 const nameValidator = () => {
     const nameValue = name.value;
@@ -151,17 +152,15 @@ const cvvValidator = () => {
 }
 
 //FORM VALIDATION FUNCTIONS CALLED 
-//HINTS DISPLAYED/HIDDEN UPON INVALID/VALID 
+    //when user clicks 'submit', the validator functions are called
+    //conditional statements checking to see if each input field has a valid value
+    //if the value is not valid, prevents page from refreshing automatically and displays validation error message
+    //if value is valid, no error message is displayed and page is refreshed 
 
 form.addEventListener('submit', (e) => {
-     e.preventDefault();
      nameValidator();
      emailValidator();
      activitiesValidator();
-
-     cardNumberValidator();
-     zipcodeValidator();
-     cvvValidator();
 
 
     if (!nameValidator()) {
@@ -199,32 +198,51 @@ form.addEventListener('submit', (e) => {
         activitiesBox.parentElement.className.remove = 'not-valid';
         activitiesBox.parentElement.lastElementChild.style.display = 'none';
      }
+     
+     //ONLY if credit card is the selected payment method, card detail validators are called
 
+    if (paymentMethod.value === 'credit-card') {      
+        cardNumberValidator();
+        zipcodeValidator();
+        cvvValidator();
 
+        if (!cardNumberValidator()) {
+            e.preventDefault();
+            cardNumber.parentElement.className.add = 'not-valid';
+            cardNumber.parentElement.className.remove = 'valid';
+            cardNumber.parentElement.lastElementChild.style.display = 'block';
+        } else {
+            cardNumber.parentElement.className.add = 'valid';
+            cardNumber.parentElement.className.remove = 'not-valid';
+            cardNumber.parentElement.lastElementChild.style.display = 'none';
+        }
+        if (!zipcodeValidator()) {
+            e.preventDefault();
+            zipcode.parentElement.className.add = 'not-valid';
+            zipcode.parentElement.className.remove = 'valid';
+            zipcode.parentElement.lastElementChild.style.display = 'block';
+        } else {
+            zipcode.parentElement.className.add = 'valid';
+            zipcode.parentElement.className.remove = 'not-valid';
+            zipcode.parentElement.lastElementChild.style.display = 'none';
+        }
+        if (!cvvValidator()) {
+            e.preventDefault();
+            cvv.parentElement.className.add = 'not-valid';
+            cvv.parentElement.className.remove = 'valid';
+            cvv.parentElement.lastElementChild.style.display = 'block';
+        } else {
+            cvv.parentElement.className.add = 'valid';
+            cvv.parentElement.className.remove = 'not-valid';
+            cvv.parentElement.lastElementChild.style.display = 'none';
+        } 
 
-    if (creditCard.selected === true  && !cardNumberValidator()) {  
-        e.preventDefault();
-        alert('Invalid card number');
-    } 
-    if (creditCard.selected === true  && !zipcodeValidator()) {
-        e.preventDefault();
-        alert('Invalid zipcode');
-    } 
-    if (creditCard.selected === true  && !cvvValidator()) {
-        e.preventDefault();
-        alert('Invalid cvv');
-    } 
-   
+    }
 })
 
-    
 
-
-
-// ACCESSIBILITY USING FOCUS AND BLUR
-
-//puts the focus on each checkbox input element when user clicks tab
-//loop iterates through each checkbox, one at a time
+// ACCESSIBILITY
+    //to improve visibility, each input field gets an obvious focus one at a time as user tabs through fields
 
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
 const activitiesBox = document.getElementById('activities-box');
