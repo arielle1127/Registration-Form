@@ -46,13 +46,17 @@ design.addEventListener('change', (e) => {
 
     if (attribute === eventT) {
         colorOptions[i].hidden = false;
-        colorOptions[i].setAttribute = true;
+        colorOptions[i].selected = true;
     } else {
         colorOptions[i].hidden = true;
-        colorOptions[i].setAttribute = false;
+        colorOptions[i].selected = false;
     }
   }
 })
+
+
+
+
 
 //ACTIVITIES COST SECTION
     //The total cost of the selected activities in the "Register for Activities" section should be totaled and displayed
@@ -158,11 +162,6 @@ const cvvValidator = () => {
     //if value is valid, no error message is displayed and page is refreshed 
 
 form.addEventListener('submit', (e) => {
-     nameValidator();
-     emailValidator();
-     activitiesValidator();
-
-
     if (!nameValidator()) {
         e.preventDefault();
         name.parentElement.className.add = 'not-valid';
@@ -202,10 +201,6 @@ form.addEventListener('submit', (e) => {
      //ONLY if credit card is the selected payment method, card detail validators are called
 
     if (paymentMethod.value === 'credit-card') {      
-        cardNumberValidator();
-        zipcodeValidator();
-        cvvValidator();
-
         if (!cardNumberValidator()) {
             e.preventDefault();
             cardNumber.parentElement.className.add = 'not-valid';
@@ -255,7 +250,6 @@ checkboxes[i].addEventListener('focus', () => {
      })
 
 checkboxes[i].addEventListener('blur', () => {    
-    activitiesBox.children[i].classList.add('blur');
     activitiesBox.children[i].classList.remove('focus');    
     })
 }
