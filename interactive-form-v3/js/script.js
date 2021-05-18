@@ -164,37 +164,37 @@ const cvvValidator = () => {
 form.addEventListener('submit', (e) => {
     if (!nameValidator()) {
         e.preventDefault();
-        name.parentElement.className.add = 'not-valid';
-        name.parentElement.className.remove = 'valid';
+        name.parentElement.classList.add('not-valid');
+        name.parentElement.classList.remove('valid');
         name.parentElement.lastElementChild.style.display = 'block';
 
      } else {
-        name.parentElement.className.add = 'valid';
-        name.parentElement.className.remove = 'not-valid';
+        name.parentElement.classList.add('valid');
+        name.parentElement.classList.remove('not-valid');
         name.parentElement.lastElementChild.style.display = 'none';
 
      }
      
     if (!emailValidator()) {
         e.preventDefault();
-        email.parentElement.className.add = 'not-valid';
-        email.parentElement.className.remove = 'valid';
+        email.parentElement.classList.add('not-valid');
+        email.parentElement.classList.remove('valid');
         email.parentElement.lastElementChild.style.display = 'block';
      } else {
-        email.parentElement.className.add = 'valid';
-        email.parentElement.className.remove = 'not-valid';
+        email.parentElement.classList.add('valid');
+        email.parentElement.classList.remove('not-valid');
         email.parentElement.lastElementChild.style.display = 'none';
 
      }
 
     if (!activitiesValidator()) {
         e.preventDefault();
-       activitiesBox.parentElement.className.add = 'not-valid';
-       activitiesBox.parentElement.className.remove = 'valid';
+       activitiesBox.parentElement.classList.add('not-valid');
+       activitiesBox.parentElement.classList.remove('valid');
        activitiesBox.parentElement.lastElementChild.style.display = 'block';
     } else {
-        activitiesBox.parentElement.className.add = 'valid';
-        activitiesBox.parentElement.className.remove = 'not-valid';
+        activitiesBox.parentElement.classList.add('valid');
+        activitiesBox.parentElement.classList.remove('not-valid');
         activitiesBox.parentElement.lastElementChild.style.display = 'none';
      }
      
@@ -203,32 +203,32 @@ form.addEventListener('submit', (e) => {
     if (paymentMethod.value === 'credit-card') {      
         if (!cardNumberValidator()) {
             e.preventDefault();
-            cardNumber.parentElement.className.add = 'not-valid';
-            cardNumber.parentElement.className.remove = 'valid';
+            cardNumber.parentElement.classList.add('not-valid');
+            cardNumber.parentElement.classList.remove('valid');
             cardNumber.parentElement.lastElementChild.style.display = 'block';
         } else {
-            cardNumber.parentElement.className.add = 'valid';
-            cardNumber.parentElement.className.remove = 'not-valid';
+            cardNumber.parentElement.classList.add('valid');
+            cardNumber.parentElement.classList.remove('not-valid');
             cardNumber.parentElement.lastElementChild.style.display = 'none';
         }
         if (!zipcodeValidator()) {
             e.preventDefault();
-            zipcode.parentElement.className.add = 'not-valid';
-            zipcode.parentElement.className.remove = 'valid';
+            zipcode.parentElement.classList.add('not-valid');
+            zipcode.parentElement.classList.remove('valid');
             zipcode.parentElement.lastElementChild.style.display = 'block';
         } else {
-            zipcode.parentElement.className.add = 'valid';
-            zipcode.parentElement.className.remove = 'not-valid';
+            zipcode.parentElement.classList.add('valid');
+            zipcode.parentElement.classList.remove('not-valid');
             zipcode.parentElement.lastElementChild.style.display = 'none';
         }
         if (!cvvValidator()) {
             e.preventDefault();
-            cvv.parentElement.className.add = 'not-valid';
-            cvv.parentElement.className.remove = 'valid';
+            cvv.parentElement.classList.add('not-valid');
+            cvv.parentElement.classList.remove('valid');
             cvv.parentElement.lastElementChild.style.display = 'block';
         } else {
-            cvv.parentElement.className.add = 'valid';
-            cvv.parentElement.className.remove = 'not-valid';
+            cvv.parentElement.classList.add('valid');
+            cvv.parentElement.classList.remove('not-valid');
             cvv.parentElement.lastElementChild.style.display = 'none';
         } 
 
